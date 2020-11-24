@@ -27,7 +27,7 @@ parser.add_argument(
     dest="stride",
     type=int,
     help="the stride length. This will be the number of CLONES skipped during analysis",
-    default=None,
+    default=1,
 )
 parser.add_argument(
     "-fah_project_code",
@@ -113,7 +113,24 @@ class GroupHug:
         return ts
 
 
-# define the function to collect RMSDs
+def get_traj_list(starting_gen, n_gens, clones_to_analyse, stride=1):
+
+    traj_list = []
+
+    for clone_number in clones_to_analyse[::stride]:
+            for j in range(starting_gen, n_gens):
+
+                xtc_file = (
+                    f"{traj_path}/CLONE{clone_number}/results{j}/positions.xtc"
+                )
+                xtc_file_path = Path(xtc_file)
+
+                if xtc_file_path.is_file():
+                    traj_list.append(xtc_file)
+
+    return traj_list
+
+
 def populate_dict(
     chunk, dictionary, pdb_file, mutant_sel, project_code, frames_to_stride
 ):
@@ -328,58 +345,18 @@ if __name__ == "__main__":
     print(f"--> Number of GENS to check: {n_gens}")
     print(f"--> Number of frames to stride per GEN: {stride_frames}")
 
-    traj_list = []
-
-    # TODO clean up all of this
     if clone_file is not None:  # if we are using a input file of clones
+        
         with open(clone_file) as f:
             temp_file = f.readlines()
             clones_to_analyse = [line.rstrip("\n") for line in temp_file]
 
-        if stride is not None:
-            for clone_number in clones_to_analyse[::stride]:
-                for j in range(starting_gen, n_gens):
-
-                    xtc_file = (
-                        f"{traj_path}/CLONE{clone_number}/results{j}/positions.xtc"
-                    )
-                    xtc_file_path = Path(xtc_file)
-
-                    if xtc_file_path.is_file():
-                        traj_list.append(xtc_file)
-        else:
-            for clone_number in clones_to_analyse:
-                for j in range(starting_gen, n_gens):
-
-                    xtc_file = (
-                        f"{traj_path}/CLONE{clone_number}/results{j}/positions.xtc"
-                    )
-                    xtc_file_path = Path(xtc_file)
-
-                    if xtc_file_path.is_file():
-                        traj_list.append(xtc_file)
+        traj_list = get_traj_list(starting_gen=starting_gen, n_gens=n_gens, clones=clones_to_analyse, stride=stride)
 
     else:  # if we are running without an input file
-        for i in range(n_clones):
 
-            # TODO clean this up, it's horrible
-            if stride is not None:  # stride over CLONES
-                if i % stride == 0:
-                    for j in range(starting_gen, n_gens):
-
-                        xtc_file = f"{traj_path}/CLONE{i}/results{j}/positions.xtc"
-                        xtc_file_path = Path(xtc_file)
-
-                        if xtc_file_path.is_file():
-                            traj_list.append(xtc_file)
-            else:  # don't stride, read all clones
-                for j in range(starting_gen, n_gens):
-
-                    xtc_file = f"{traj_path}/CLONE{i}/results{j}/positions.xtc"
-                    xtc_file_path = Path(xtc_file)
-
-                    if xtc_file_path.is_file():
-                        traj_list.append(xtc_file)
+        clones_to_analyse = [x for x in range(n_clones)]
+        traj_list = get_traj_list(starting_gen=starting_gen, n_gens=n_gens, clones=clones_to_analyse, stride=stride)
 
     # break the traj list up ready for multiprocessing
     print("--> Breaking trajectory list into smaller chunks...")
