@@ -359,8 +359,6 @@ if __name__ == "__main__":
 
     else: # if we are running without an input file
         for i in range(n_clones):
-            # if i % 500 == 0:
-            #     print(i)
 
             # TODO clean this up, it's horrible
             if stride is not None:  # stride over CLONES
