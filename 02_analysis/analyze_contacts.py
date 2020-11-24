@@ -114,7 +114,9 @@ class GroupHug:
 
 
 # define the function to collect RMSDs
-def populate_dict(chunk, dictionary, pdb_file, mutant_sel, project_code, frames_to_stride):
+def populate_dict(
+    chunk, dictionary, pdb_file, mutant_sel, project_code, frames_to_stride
+):
 
     interface_selection_strings = {
         "rbd": "segid A and (backbone and (resid 403 or resid 417 or resid 439 or resid 445-447 or resid 449 or resid 453 or resid 455 or resid 456 or resid 473-477 or resid 484-487 or resid 489 or resid 490 or resid 493-503 or resid 505 or resid 506))",
@@ -329,7 +331,7 @@ if __name__ == "__main__":
     traj_list = []
 
     # TODO clean up all of this
-    if clone_file is not None: # if we are using a input file of clones
+    if clone_file is not None:  # if we are using a input file of clones
         with open(clone_file) as f:
             temp_file = f.readlines()
             clones_to_analyse = [line.rstrip("\n") for line in temp_file]
@@ -357,7 +359,7 @@ if __name__ == "__main__":
                     if xtc_file_path.is_file():
                         traj_list.append(xtc_file)
 
-    else: # if we are running without an input file
+    else:  # if we are running without an input file
         for i in range(n_clones):
 
             # TODO clean this up, it's horrible
