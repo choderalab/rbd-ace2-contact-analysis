@@ -7,7 +7,6 @@ import MDAnalysis.transformations as trans
 import numpy as np
 import pandas as pd
 from MDAnalysis.analysis import align, distances, rms
-from MDAnalysis.analysis.hbonds import WaterBridgeAnalysis
 
 parser = argparse.ArgumentParser(description="Process FAH data.")
 parser.add_argument(
@@ -113,11 +112,11 @@ class GroupHug:
         return ts
 
 
-def get_traj_list(starting_gen, n_gens, clones_to_analyse, stride=1):
+def get_traj_list(starting_gen, n_gens, clones, stride=1):
 
     traj_list = []
 
-    for clone_number in clones_to_analyse[::stride]:
+    for clone_number in clones[::stride]:
         for j in range(starting_gen, n_gens):
 
             xtc_file = f"{traj_path}/CLONE{clone_number}/results{j}/positions.xtc"
@@ -210,7 +209,7 @@ def populate_dict(
         # loop over each frame in the current trajectory, with a defined stride
         for ts in mobile.trajectory[::frames_to_stride]:
 
-            print(ts.frame)
+            print(f"--> Current frame: {ts.frame}")
 
             # calculate the key interactions
             # RBD --- ACE2
