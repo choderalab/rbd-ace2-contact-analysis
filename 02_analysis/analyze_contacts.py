@@ -118,15 +118,13 @@ def get_traj_list(starting_gen, n_gens, clones_to_analyse, stride=1):
     traj_list = []
 
     for clone_number in clones_to_analyse[::stride]:
-            for j in range(starting_gen, n_gens):
+        for j in range(starting_gen, n_gens):
 
-                xtc_file = (
-                    f"{traj_path}/CLONE{clone_number}/results{j}/positions.xtc"
-                )
-                xtc_file_path = Path(xtc_file)
+            xtc_file = f"{traj_path}/CLONE{clone_number}/results{j}/positions.xtc"
+            xtc_file_path = Path(xtc_file)
 
-                if xtc_file_path.is_file():
-                    traj_list.append(xtc_file)
+            if xtc_file_path.is_file():
+                traj_list.append(xtc_file)
 
     return traj_list
 
@@ -346,17 +344,27 @@ if __name__ == "__main__":
     print(f"--> Number of frames to stride per GEN: {stride_frames}")
 
     if clone_file is not None:  # if we are using a input file of clones
-        
+
         with open(clone_file) as f:
             temp_file = f.readlines()
             clones_to_analyse = [line.rstrip("\n") for line in temp_file]
 
-        traj_list = get_traj_list(starting_gen=starting_gen, n_gens=n_gens, clones=clones_to_analyse, stride=stride)
+        traj_list = get_traj_list(
+            starting_gen=starting_gen,
+            n_gens=n_gens,
+            clones=clones_to_analyse,
+            stride=stride,
+        )
 
     else:  # if we are running without an input file
 
         clones_to_analyse = [x for x in range(n_clones)]
-        traj_list = get_traj_list(starting_gen=starting_gen, n_gens=n_gens, clones=clones_to_analyse, stride=stride)
+        traj_list = get_traj_list(
+            starting_gen=starting_gen,
+            n_gens=n_gens,
+            clones=clones_to_analyse,
+            stride=stride,
+        )
 
     # break the traj list up ready for multiprocessing
     print("--> Breaking trajectory list into smaller chunks...")
