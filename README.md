@@ -24,7 +24,7 @@ Code and workflow for running MD simulations on Folding@home to analyze RBM:ACE2
   For the constructed RBD:ACE2 complex, these included sites: N53, N90, N103, N322, N432, N546, and N690 on ACE2 and N343 on the RBD.
   Base NAG residues of each glycan structure (FA2, FA26G1, FA2, FA2, FA2G2, A2, FA2, FA2G2, respectively) were acquired from [Elisa Fadda](https://www.maynoothuniversity.ie/people/elisa-fadda).
   Each glycan was then aligned to the corresponding NAG stub in the RBD:ACE2 model in PyMOL 2.3.2 and any resulting clashes were refined in [ISOLDE](https://isolde.cimr.cam.ac.uk/) ([Croll, 2018](https://doi.org/10.1107/S2059798318002425)).
-  Full details of the glycosylation patterns / structures used and full workflow are available [here](https://github.com/choderalab/rbm-ace2-contact-analysis).
+  Full details of the glycosylation patterns / structures used and full workflow are available [here](https://github.com/choderalab/rbm-ace2-contact-analysis). Mutations were introduced using PyMOL.
 
   **System solvation and parameterization:**
   The refined glycosylated RBD:ACE2 complex was prepared for simulation using the [AmberTools17](https://ambermd.org/AmberTools.php) tleap suite (Case et al., 2017).
