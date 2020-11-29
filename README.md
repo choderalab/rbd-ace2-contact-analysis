@@ -1,5 +1,25 @@
-# rbm-ace2-contact-analysis
-Code and workflow for running MD simulations on Folding@home to analyze RBM:ACE2 contacts
+# rbd-ace2-contact-analysis
+Code and workflow for running MD simulations on Folding@home to analyze RBD:ACE2 contacts
+
+Publication: 
+
+## License
+* This software is licensed under the [MIT license](https://opensource.org/licenses/MIT) - a copy of this license is provided as `SOFTWARE_LICENSE`
+* The data in this repository is made available under the Creative Commons [CC0 (“No Rights Reserved”) License](https://creativecommons.org/share-your-work/public-domain/cc0/) - a copy of this license is provided as `DATA_LICENSE`
+
+## Manifest
+
+* `01_system_preparation` - Contains all scripts and PDBs before and after structure preparation, system parameterization, and equilibration. Also contains the representative glycan structures added to RBD:ACE2
+* `02_analysis` - Contains the script used to analyze RBD:ACE2 contacts in the trajectories
+
+## Contributors
+
+* Ivy Zhang
+* William G. Glass
+* Tristan Croll
+* Aoife M. Harbison
+* Elisa Fadda
+* John D. Chodera
 
 # Simulation details
 
