@@ -26,8 +26,6 @@ Code and workflow for running MD simulations on Folding@home to analyze RBM:ACE2
   Each glycan was then aligned to the corresponding NAG stub in the RBD:ACE2 model in PyMOL 2.3.2 and any resulting clashes were refined in [ISOLDE](https://isolde.cimr.cam.ac.uk/) ([Croll, 2018](https://doi.org/10.1107/S2059798318002425)).
   Full details of the glycosylation patterns / structures used and full workflow are available [here](https://github.com/choderalab/rbm-ace2-contact-analysis).
 
-  Mutations were introduced using PyMOL.
-
   **System solvation and parameterization:**
   The refined glycosylated RBD:ACE2 complex was prepared for simulation using the [AmberTools17](https://ambermd.org/AmberTools.php) tleap suite (Case et al., 2017).
   All relevant disulfide bridges were specified as well as covalent connectivity within each glycan structure.
