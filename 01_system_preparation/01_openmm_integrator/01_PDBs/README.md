@@ -2,9 +2,9 @@
 
 ## Notes on preparing the ACE2:RBD Complex using ISOLDE
 
-The fully glycosylated ACE2:RBD complex was constructed by aligning the previously constructed ACE2 and RBD systems with the refined `6m0j` [structure](https://github.com/thorn-lab/coronavirus_structural_task_force/tree/master/pdb/surface_glycoprotein/SARS-CoV-2/6m0j).
+The fully glycosylated ACE2:RBD complex was constructed by aligning the glycosylated/refined apo ACE2 and RBD systems to the (reference) refined `6m0j` [structure](https://github.com/thorn-lab/coronavirus_structural_task_force/tree/master/pdb/surface_glycoprotein/SARS-CoV-2/6m0j) and deleting the reference 6m0j structure.            
 
-It was immediately clear that there were sever clashes between residues at the interface of ACE2 and the RBD. In order to accurately describe the interface [ISOLDE](https://isolde.cimr.cam.ac.uk/) was used for structural refinement.
+It was immediately clear that there were severe clashes between residues at the interface of ACE2 and the RBD. In order to accurately describe the interface [ISOLDE](https://isolde.cimr.cam.ac.uk/) was used for structural refinement.
 
 ### Steps taken in ISOLDE
 
@@ -14,7 +14,7 @@ Below describes the steps taken to refine the ACE2:RBD complex.
 
 2. Within the "hydrogens corrected" model, glycans had been renamed to PDB format (e.g. NAG, MAN, etc...) and bonding between glycans had already been specified. These changes were applied using the scripts detailed at the end of this README.
 
-3. In ChimeraX, the refined `6m0j` CST structure was loaded in alongside the `1_refining_ace2_rbd_complex_hydrogens_corrected.pdb` model. These were then aligned:
+3. In ChimeraX, the refined `6m0j` CST structure was loaded in alongside the `1_refining_ace2_rbd_complex_hydrogens_corrected.pdb` model. The refined `6m0j` CST structure was used as a reference in step 9. This reference was needed to make sure that there weren't any major changes in the refined structure. These were then aligned:
     * Command line: `match #2 to #1`
 
 4. All crystal waters were removed due to clashes:
