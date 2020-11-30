@@ -42,8 +42,8 @@ chk_freq = 500
 traj_freq = 1000  # 2500 frames
 
 # Set input file names
-amber_prmtop_file = "../02_run_tleap/RBD_ACE2_complex_FullGlycos.prmtop"
-amber_inpcrd_file = "../02_run_tleap/RBD_ACE2_complex_FullGlycos.inpcrd"
+amber_prmtop_file = "input/0.prmtop"
+amber_inpcrd_file = "input/0.inpcrd"
 
 # Set file names
 output_prefix = f'output/'
