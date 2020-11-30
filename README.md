@@ -1,4 +1,4 @@
-# rbd-ace2-contact-analysis
+# RBD ACE2 contact analysis
 Code and workflow for running MD simulations on Folding@home to analyze RBD:ACE2 contacts
 
 Publication: 
