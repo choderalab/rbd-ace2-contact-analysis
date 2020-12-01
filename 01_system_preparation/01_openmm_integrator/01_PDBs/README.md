@@ -1,10 +1,10 @@
 ### Author: William Glass
 
-## Preparing the ACE2:RBD Complex using ISOLDE
+## Notes on preparing the ACE2:RBD Complex using ISOLDE
 
-The fully glycosylated ACE2:RBD complex was constructed by aligning the previously constructed ACE2 and RBD systems with the refined `6m0j` [structure](https://github.com/thorn-lab/coronavirus_structural_task_force/tree/master/pdb/surface_glycoprotein/SARS-CoV-2/6m0j).
+The fully glycosylated ACE2:RBD complex was constructed by aligning the glycosylated/refined apo ACE2 and RBD systems to the (reference) refined `6m0j` [structure](https://github.com/thorn-lab/coronavirus_structural_task_force/tree/master/pdb/surface_glycoprotein/SARS-CoV-2/6m0j) and deleting the reference 6m0j structure.            
 
-It was immediately clear that there were sever clashes between residues at the interface of ACE2 and the RBD. In order to accurately describe the interface [ISOLDE](https://isolde.cimr.cam.ac.uk/) was used for structural refinement.
+It was immediately clear that there were severe clashes between residues at the interface of ACE2 and the RBD. In order to accurately describe the interface [ISOLDE](https://isolde.cimr.cam.ac.uk/) was used for structural refinement.
 
 ### Steps taken in ISOLDE
 
@@ -12,9 +12,9 @@ Below describes the steps taken to refine the ACE2:RBD complex.
 
 1. After evaluation of the initial aligned ACE2:RBD complex (`0_RBD_ACE2_complex_from_1r42ref_6m0j_FyllGlycos_alignto6m0jRefined_NOCAPS.pdb`) in ChimeraX and ISOLDE, it was clear there were difficulties in assigning the correct hydrogens to glycans (mainly due to the manual fitting of glycans to each glycosylation site). This was solved by [Tristan Croll](https://github.com/tristanic), where a "hydrogens corrected" system was generated: `1_refining_ace2_rbd_complex_hydrogens_corrected.pdb`.
 
-2. Within the "hydrogens corrected" model glycans had been renamed to PDB format (e.g. NAG, MAN, etc...) and bonding between glycans had already been specified. These changes were applied using the scripts detailed at the end of this README.
+2. Within the "hydrogens corrected" model, glycans had been renamed to PDB format (e.g. NAG, MAN, etc...) and bonding between glycans had already been specified. These changes were applied using the scripts detailed at the end of this README.
 
-3. In ChimeraX, the refined `6m0j` structure was loaded in alongside the `1_refining_ace2_rbd_complex_hydrogens_corrected.pdb` model. These were then aligned:
+3. In ChimeraX, the refined `6m0j` CST structure was loaded in alongside the `1_refining_ace2_rbd_complex_hydrogens_corrected.pdb` model. The refined `6m0j` CST structure was used as a reference in step 9. This reference was needed to make sure that there weren't any major changes in the refined structure. These were then aligned:
     * Command line: `match #2 to #1`
 
 4. All crystal waters were removed due to clashes:
@@ -29,7 +29,7 @@ Below describes the steps taken to refine the ACE2:RBD complex.
         * K31 (ACE2) - > it was clashing with T489 (RBD)
         * Flipped V107 (ACE2) as to match 6m0j better and reduce clash with the nearby N103 glycan.
 
-7. Two sets of [custom scripts](https://github.com/tristanic/isolde/blob/75f3ad7176a8fc200681ceb1b9197562f732ba5e/isolde/src/atomic/building/build_utils.py#L259) were used to create disulphide bonds within both ACE2 and the RBD:
+7. Two sets of [custom scripts](https://github.com/tristanic/isolde/blob/75f3ad7176a8fc200681ceb1b9197562f732ba5e/isolde/src/atomic/building/build_utils.py#L259) were used to create disulphide bonds within both ACE2 and RBD chains:
     ```python
     current, possible, ambiguous = current_and_possible_disulfides(m)
     for cys_pair in possible:
@@ -46,7 +46,7 @@ Each bond was checked and if any had not been bonded a custom `make_bonds.py` sc
 
 11. The refined `6m0j` structure was removed and the final refined ACE2:RBD saved as `2_refined_ace2_rbd_complex.pdb`
 
-12. Hydrogens were removed from the final structure due to naming issues (where `tleap` added extra hydrogens). By removal, `tleap` added hydrogens correctly. Secondary structure information was removed (as this is specified in the `tleap` input anyway). Additionally, `CONECT` records were removed as these are not read by `tleap` and when adding termini caps later, will not correspond to the correct residues.
+12. Hydrogens were removed from the final structure due to naming issues (where `tleap` added extra hydrogens). By removing these, `tleap` subsequently added hydrogens correctly. Secondary structure information was removed (as this is created in `tleap` later). Additionally, `CONECT` records were removed as these are not read by `tleap` and when adding termini caps later, will not correspond to the correct residues.
 
 * **Note**: investigating how `tleap` can be used with `CONECT` records would reduce bottlenecks in the described pipeline above.
 
