@@ -1,7 +1,7 @@
 # RBD ACE2 contact analysis
 Code and workflow for running MD simulations on Folding@home to analyze RBD:ACE2 contacts
 
-Publication: 
+Publication: https://doi.org/10.1016/j.cell.2021.01.037
 
 ## License
 * This software is licensed under the [MIT license](https://opensource.org/licenses/MIT) - a copy of this license is provided as `SOFTWARE_LICENSE`
