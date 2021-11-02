@@ -11,6 +11,7 @@ Publication: https://doi.org/10.1016/j.cell.2021.01.037
 
 * `01_system_preparation` - Contains all scripts and PDBs before and after structure preparation, system parameterization, and equilibration. Also contains the representative glycan structures added to RBD:ACE2
 * `02_analysis` - Contains the script used to analyze RBD:ACE2 contacts in the trajectories
+* `additional_data` - Contains all scripts and PDBs before and after structure preparation, system parameterization, and equilibration for systems that were not included in the paper, but are relevant to this study.
 
 ## Contributors
 

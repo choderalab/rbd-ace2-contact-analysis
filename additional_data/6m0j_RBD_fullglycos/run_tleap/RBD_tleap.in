@@ -1,0 +1,38 @@
+source leaprc.GLYCAM_06j-1 #  Source leaprc file for GLYCAM force field
+source leaprc.protein.ff14SB #  Source leaprc file for ff14SB protein force field
+source leaprc.water.tip3p #  Source leaprc file for TIP3P water model (and ions)
+
+mol = loadpdb RBD_6m0j_refine_14_capped_N343glycosylated_cleaned_LEAP_INPUT.pdb #  Load PDB file for protein-glycan complex
+
+#  Add disulphide bridges
+
+bond mol.336.SG mol.361.SG
+bond mol.379.SG mol.432.SG
+bond mol.391.SG mol.525.SG
+bond mol.480.SG mol.488.SG
+
+#  N343 glycans
+
+bond mol.343.ND2 mol.528.C1 #  Bond N343 to GlcNAc
+bond mol.528.O6 mol.537.C1
+bond mol.528.O4 mol.529.C1
+bond mol.529.O4 mol.530.C1
+bond mol.530.O6 mol.531.C1
+bond mol.531.O2 mol.532.C1
+bond mol.532.O4 mol.533.C1
+bond mol.530.O3 mol.534.C1
+bond mol.534.O2 mol.535.C1
+bond mol.535.O4 mol.536.C1
+
+# Solvate the system and add ions
+
+solvateBox mol TIP3PBOX 15 
+addionsrand mol Na+ 50 Cl- 52 #  Randomly replace waters with ions, waters = 18585, see README for how No. ions chosen
+
+# Save everything
+
+savepdb mol RBD_6m0j_refine_14_FullGlycos.pdb
+
+saveamberparm mol RBD_6m0j_refine_14_FullGlycos.prmtop RBD_6m0j_refine_14_FullGlycos.inpcrd #  Save AMBER topology and coordinate files
+
+quit #  Quit tleap program
